@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>実績 | 卓精会 品川区卓球チーム</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;700;900&family=Bebas+Neue&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --red: #C0392B;
+      --red-dark: #922B21;
+      --red-light: #E74C3C;
+      --bg: #F7F4EE;
+      --bg2: #EDEAE2;
+      --text: #1A1A1A;
+      --text-muted: #6B6560;
+      --gray: #9A9590;
+      --white: #FFFFFF;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 20px 6vw;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(247,244,238,0.97);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+
+    .nav-logo {
+      font-family: 'Noto Serif JP', serif;
+      font-weight: 900;
+      font-size: 18px;
+      letter-spacing: 0.1em;
+      color: var(--text);
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--red); }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--gray);
+      text-decoration: none;
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--text); }
+
+    /* ── PAGE HEADER ── */
+    .page-header {
+      padding: 160px 6vw 80px;
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+      background: var(--bg);
+    }
+
+    .page-header-en {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.5em;
+      color: var(--red);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .page-header-en::after {
+      content: '';
+      width: 60px;
+      height: 1px;
+      background: var(--red);
+    }
+
+    .page-header h1 {
+      font-family: 'Noto Serif JP', serif;
+      font-weight: 900;
+      font-size: clamp(42px, 8vw, 96px);
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+
+    .page-header p {
+      margin-top: 20px;
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 2;
+      max-width: 500px;
+    }
+
+    /* ── FILTER TABS ── */
+    .filter-bar {
+      padding: 40px 6vw 0;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.35em;
+      padding: 8px 20px;
+      border: 1px solid rgba(0,0,0,0.15);
+      background: transparent;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .filter-btn:hover, .filter-btn.active {
+      background: var(--red);
+      border-color: var(--red);
+      color: white;
+    }
+
+    /* ── ACHIEVEMENTS GRID ── */
+    .achievements {
+      padding: clamp(40px, 6vh, 80px) 6vw clamp(80px, 12vh, 140px);
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 2px;
+    }
+
+    .achievement-card {
+      background: var(--white);
+      border: 1px solid rgba(0,0,0,0.07);
+      padding: 22px 24px;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      transition: box-shadow 0.25s, transform 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .achievement-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px;
+      height: 100%;
+      background: var(--red);
+      transform: scaleY(0);
+      transform-origin: bottom;
+      transition: transform 0.3s cubic-bezier(0.16,1,0.3,1);
+    }
+
+    .achievement-card:hover {
+      box-shadow: 0 8px 32px rgba(0,0,0,0.09);
+      transform: translateY(-3px);
+    }
+    .achievement-card:hover::before { transform: scaleY(1); }
+
+    .card-category {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.4em;
+      color: var(--red);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .card-category::after {
+      content: '';
+      flex: 1;
+      max-width: 32px;
+      height: 1px;
+      background: var(--red);
+      opacity: 0.5;
+    }
+
+    .card-title {
+      font-family: 'Noto Serif JP', serif;
+      font-weight: 700;
+      font-size: 14px;
+      line-height: 1.5;
+      color: var(--text);
+    }
+
+    .card-result {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .card-result strong {
+      color: var(--red);
+      font-weight: 500;
+    }
+
+    .card-subtitle {
+      font-size: 11px;
+      letter-spacing: 0.05em;
+      color: var(--gray);
+      line-height: 1.5;
+      border-left: 2px solid rgba(0,0,0,0.1);
+      padding-left: 10px;
+    }
+    .card-subtitle {
+      font-size: 11px;
+      letter-spacing: 0.05em;
+      color: var(--gray);
+      line-height: 1.5;
+      border-left: 2px solid rgba(0,0,0,0.1);
+      padding-left: 10px;
+    }
+    .achievement-card.featured .card-subtitle {
+      color: rgba(255,255,255,0.55);
+      border-left-color: rgba(255,255,255,0.25);
+    }
+
+    .card-link {
+      margin-top: auto;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.35em;
+      color: var(--gray);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: color 0.2s;
+    }
+    .achievement-card:hover .card-link { color: var(--red); }
+    .card-link::after {
+      content: '→';
+      transition: transform 0.2s;
+    }
+    .achievement-card:hover .card-link::after { transform: translateX(4px); }
+
+    /* ── HIGHLIGHT (featured card) ── */
+    .achievement-card.featured {
+      background: var(--red);
+      border-color: var(--red);
+      color: white;
+    }
+    .achievement-card.featured::before { background: white; }
+    .achievement-card.featured .card-category { color: rgba(255,255,255,0.7); }
+    .achievement-card.featured .card-category::after { background: rgba(255,255,255,0.4); }
+    .achievement-card.featured .card-title { color: white; }
+    .achievement-card.featured .card-result { color: rgba(255,255,255,0.8); }
+    .achievement-card.featured .card-result strong { color: white; }
+    .achievement-card.featured .card-link { color: rgba(255,255,255,0.6); }
+    .achievement-card.featured:hover .card-link { color: white; }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid rgba(0,0,0,0.1);
+      padding: 40px 6vw;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+      background: var(--bg2);
+    }
+    .footer-logo {
+      font-family: 'Noto Serif JP', serif;
+      font-weight: 900;
+      font-size: 22px;
+      color: var(--text);
+    }
+    .footer-logo span { color: var(--red); }
+    .footer-copy {
+      font-size: 11px;
+      color: var(--gray);
+      letter-spacing: 0.2em;
+    }
+
+    /* ── REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.65s cubic-bezier(0.16,1,0.3,1), transform 0.65s cubic-bezier(0.16,1,0.3,1);
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    @media (max-width: 768px) {
+      .achievements { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="takuseikai.html" class="nav-logo">卓<span>精</span>会</a>
+  <ul class="nav-links">
+    <li><a href="takuseikai.html#about">チームについて</a></li>
+    <li><a href="takuseikai.html#practice">練習</a></li>
+    <li><a href="#" class="active">実績</a></li>
+    <li><a href="takuseikai.html#join">入会案内</a></li>
+  </ul>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="page-header-en">ACHIEVEMENTS</div>
+  <h1>主な実績</h1>
+  <p>創設以来、全国大会・東京都大会をはじめとする多数の大会で優秀な成績を収めています。</p>
+</div>
+
+<!-- FILTER -->
+<div class="filter-bar">
+  <button class="filter-btn active">ALL</button>
+  <button class="filter-btn">全日本クラブ選手権</button>
+  <button class="filter-btn">東京都大会</button>
+  <button class="filter-btn">全日本選手権</button>
+  <button class="filter-btn">男子</button>
+  <button class="filter-btn">女子</button>
+  <button class="filter-btn">男子個人</button>
+  <button class="filter-btn">女子個人</button>
+  <button class="filter-btn">男子団体</button>
+  <button class="filter-btn">女子団体</button>
+</div>
+
+<!-- ACHIEVEMENTS -->
+<div class="achievements">
+
+  <!-- 2026年3月 第78回東京卓球選手権 -->
+  <a class="achievement-card featured reveal" data-tags="東京都大会,男子個人,女子個人,男子,女子" href="https://www.tttf.jp/Schedule/Meet/Details/1083#CompetitionResult" target="_blank" rel="noopener">
+    <div class="card-category">東京都大会</div>
+    <div class="card-title">TOKYO OPEN 2026<br>第78回東京卓球選手権大会</div>
+    <div class="card-subtitle">2026年3月17〜22日 ／ 男女個人 ／ 京王アリーナTOKYO（武蔵野の森）</div>
+    <div class="card-result">男子・女子 シングルス・ダブルス・年代別（サーティ〜ナインティ）・ジュニア・カデット<br><strong>🔴 開催中（結果公開待ち）</strong></div>
+    <div class="card-link">TF東京で結果を見る</div>
+  </a>
+
+  <!-- 2026年2月 第61回全関東社会人卓球選手権 男子フィフティ 2位 -->
+  <a class="achievement-card reveal" data-tags="全日本選手権,男子個人,男子" href="https://www.cttf.or.jp/08gouji/2025ks/2025ks.html" target="_blank" rel="noopener">
+    <div class="card-category">全日本選手権</div>
+    <div class="card-title">第61回全関東社会人卓球選手権大会<br>男子フィフティ</div>
+    <div class="card-subtitle">2026年2月22日 ／ 男子個人（年代別） ／ YohaSアリーナ（千葉）</div>
+    <div class="card-result">男子フィフティ <strong>🥈 2位</strong></div>
+    <div class="card-link">大会結果を見る</div>
+  </a>
+
+  <!-- 2025年3月 第77回東京卓球選手権 男子フィフティ 3位 卓球レポート -->
+  <a class="achievement-card reveal" data-tags="東京都大会,男子個人,男子" href="https://www.butterfly.co.jp/takurepo/tournament/detail/026043.html" target="_blank" rel="noopener">
+    <div class="card-category">東京都大会</div>
+    <div class="card-title">TOKYO OPEN 2025<br>第77回東京卓球選手権大会 男子フィフティ</div>
+    <div class="card-subtitle">2025年3月 ／ 男子個人（年代別） ／ 東京体育館</div>
+    <div class="card-result">男子フィフティ 準決勝進出 <strong>🥉 3位</strong></div>
+    <div class="card-link">卓球レポートで詳細を見る</div>
+  </a>
+
+  <!-- 2025年3月 第77回東京卓球選手権 男子フィフティ 3位 TTTF -->
+  <a class="achievement-card reveal" data-tags="東京都大会,男子個人,男子" href="https://www.tttf.jp/Schedule/Meet/Details/1006" target="_blank" rel="noopener">
+    <div class="card-category">東京都大会</div>
+    <div class="card-title">TOKYO OPEN 2025<br>第77回東京卓球選手権大会 男子フィフティ</div>
+    <div class="card-subtitle">2025年3月 ／ 男子個人（年代別） ／ 東京体育館</div>
+    <div class="card-result">男子フィフティ <strong>🥉 3位</strong></div>
+    <div class="card-link">TF東京で詳細を見る</div>
+  </a>
+
+  <!-- 2024年11月 全日本マスターズ 女子フィフティ 4位 -->
+  <a class="achievement-card reveal" data-tags="全日本選手権,女子個人,女子" href="https://www.butterfly.co.jp/takurepo/tournament/detail/025452.html" target="_blank" rel="noopener">
+    <div class="card-category">全日本選手権</div>
+    <div class="card-title">2024年全日本卓球選手権大会<br>マスターズの部 女子フィフティ</div>
+    <div class="card-subtitle">2024年11月1〜4日 ／ 女子個人（年代別） ／ かほく市総合体育館（石川）</div>
+    <div class="card-result">女子フィフティ <strong>4位</strong></div>
+    <div class="card-link">卓球レポートで詳細を見る</div>
+  </a>
+
+  <!-- 2024年3月 第76回東京卓球選手権 男子ハイシックスティ 準優勝 -->
+  <a class="achievement-card reveal" data-tags="東京都大会,男子個人,男子" href="https://www.tttf.jp/Schedule/Meet/Details/929" target="_blank" rel="noopener">
+    <div class="card-category">東京都大会</div>
+    <div class="card-title">TOKYO OPEN 2024<br>第76回東京卓球選手権大会 男子ハイシックスティ</div>
+    <div class="card-subtitle">2024年3月 ／ 男子個人（年代別） ／ 東京体育館</div>
+    <div class="card-result">男子ハイシックスティ <strong>🥈 準優勝</strong></div>
+    <div class="card-link">TF東京で詳細を見る</div>
+  </a>
+
+  <!-- 2023年9月 第42回全日本クラブ 女子30歳以上 3位 -->
+  <a class="achievement-card reveal" data-tags="全日本クラブ選手権,女子団体,女子" href="https://www.butterfly.co.jp/takurepo/tournament/detail/023092.html" target="_blank" rel="noopener">
+    <div class="card-category">全日本クラブ選手権</div>
+    <div class="card-title">第42回全日本クラブ卓球選手権大会<br>女子30歳以上の部</div>
+    <div class="card-subtitle">2023年8月31日〜9月3日 ／ 女子団体 ／ 広島県立総合体育館</div>
+    <div class="card-result"><strong>🥉 3位</strong></div>
+    <div class="card-link">卓球レポートで詳細を見る</div>
+  </a>
+
+  <!-- 2023年9月 第42回全日本クラブ 女子50歳以上 3位 -->
+  <a class="achievement-card reveal" data-tags="全日本クラブ選手権,女子団体,女子" href="https://www.butterfly.co.jp/takurepo/tournament/detail/023092.html" target="_blank" rel="noopener">
+    <div class="card-category">全日本クラブ選手権</div>
+    <div class="card-title">第42回全日本クラブ卓球選手権大会<br>女子50歳以上の部</div>
+    <div class="card-subtitle">2023年8月31日〜9月3日 ／ 女子団体 ／ 広島県立総合体育館</div>
+    <div class="card-result"><strong>🥉 3位</strong></div>
+    <div class="card-link">卓球レポートで詳細を見る</div>
+  </a>
+
+  <!-- 2023年6月 パラIDジャパン 男子シングルス -->
+  <a class="achievement-card reveal" data-tags="全日本選手権,男子個人,男子" href="https://www.butterfly.co.jp/takurepo/tournament/detail/022697.html" target="_blank" rel="noopener">
+    <div class="card-category">全日本選手権</div>
+    <div class="card-title">パラIDジャパン・チャンピオンシップ卓球大会2023<br>男子シングルス</div>
+    <div class="card-subtitle">2023年6月16〜17日 ／ 男子個人 ／ 横浜武道館</div>
+    <div class="card-result">男子シングルス <strong>10位</strong></div>
+    <div class="card-link">卓球レポートで詳細を見る</div>
+  </a>
+
+  <!-- 2022年9月 第41回全日本クラブ 女子30歳以上 準優勝 -->
+  <a class="achievement-card reveal" data-tags="全日本クラブ選手権,女子団体,女子" href="https://www.nittaku.com/nittaku-news/topics/post-3548" target="_blank" rel="noopener">
+    <div class="card-category">全日本クラブ選手権</div>
+    <div class="card-title">第41回全日本クラブ選手権大会<br>女子30歳以上の部</div>
+    <div class="card-subtitle">2022年9月 ／ 女子団体 ／ いしかわ総合スポーツセンター</div>
+    <div class="card-result"><strong>🥈 準優勝</strong></div>
+    <div class="card-link">Nittakuで詳細を見る</div>
+  </a>
+
+  <!-- 2022年9月 第41回全日本クラブ 女子50歳以上 3位 -->
+  <a class="achievement-card reveal" data-tags="全日本クラブ選手権,女子団体,女子" href="https://www.nittaku.com/nittaku-news/topics/post-3548" target="_blank" rel="noopener">
+    <div class="card-category">全日本クラブ選手権</div>
+    <div class="card-title">第41回全日本クラブ選手権大会<br>女子50歳以上の部</div>
+    <div class="card-subtitle">2022年9月 ／ 女子団体 ／ いしかわ総合スポーツセンター</div>
+    <div class="card-result"><strong>🥉 3位</strong></div>
+    <div class="card-link">Nittakuで詳細を見る</div>
+  </a>
+
+  <!-- 2022年9月 第41回全日本クラブ 女子 卓球レポートまとめ -->
+  <a class="achievement-card reveal" data-tags="全日本クラブ選手権,女子団体,女子" href="https://www.butterfly.co.jp/takurepo/tournament/detail/021459.html" target="_blank" rel="noopener">
+    <div class="card-category">全日本クラブ選手権</div>
+    <div class="card-title">第41回全日本クラブ卓球選手権大会<br>女子の結果</div>
+    <div class="card-subtitle">2022年9月 ／ 女子団体 ／ 卓球レポート掲載</div>
+    <div class="card-result">女子30歳以上 <strong>🥈 準優勝</strong> ／ 女子50歳以上 <strong>🥉 3位</strong></div>
+    <div class="card-link">卓球レポートで詳細を見る</div>
+  </a>
+
+  <!-- 2022年9月 全日本クラブ JTTA -->
+  <a class="achievement-card reveal" data-tags="全日本クラブ選手権,男子団体,女子団体,男子,女子" href="https://jtta.or.jp/news/14888" target="_blank" rel="noopener">
+    <div class="card-category">全日本クラブ選手権</div>
+    <div class="card-title">全日本クラブ卓球選手権大会<br>一般の部・30歳以上の部</div>
+    <div class="card-subtitle">2022年9月3日 ／ 男女団体 ／ JTTA公式</div>
+    <div class="card-result">一般の部、30歳以上の部 最終日結果<br><strong>上位入賞</strong></div>
+    <div class="card-link">JTTAで詳細を見る</div>
+  </a>
+
+  <!-- 2021年11月 第74回東京選手権 年代別予選 -->
+  <a class="achievement-card reveal" data-tags="東京都大会,男子個人,女子個人,男子,女子" href="https://www.tttf.jp/Schedule/Meet/Details/790" target="_blank" rel="noopener">
+    <div class="card-category">東京都大会</div>
+    <div class="card-title">第74回東京卓球選手権大会<br>年代別（ハイシックスティ〜ハイセブンティ）予選</div>
+    <div class="card-subtitle">2021年11月24日 ／ 男女個人（年代別） ／ 駒沢体育館</div>
+    <div class="card-result"><strong>上位入賞</strong></div>
+    <div class="card-link">TF東京で詳細を見る</div>
+  </a>
+
+  <!-- 2021年3月 東京優勝大会 男子年代別 -->
+  <a class="achievement-card reveal" data-tags="東京都大会,男子個人,男子" href="https://www.nittaku.com/nittaku-news/topics/post-2702" target="_blank" rel="noopener">
+    <div class="card-category">東京都大会</div>
+    <div class="card-title">東京優勝大会<br>男子年代別（40〜80代）</div>
+    <div class="card-subtitle">2021年3月5日 ／ 男子個人（年代別） ／ 東京体育館</div>
+    <div class="card-result">男子ハイシックスティ <strong>🥇 優勝・🥈 準優勝</strong><br>男子フォーティ <strong>🥉 3位</strong></div>
+    <div class="card-link">Nittakuで詳細を見る</div>
+  </a>
+
+  <!-- 2018年7月 第37回全日本クラブ 男子60代 準優勝 -->
+  <a class="achievement-card reveal" data-tags="全日本クラブ選手権,男子団体,男子" href="https://www.nittaku.com/nittaku-news/topics/post-490" target="_blank" rel="noopener">
+    <div class="card-category">全日本クラブ選手権</div>
+    <div class="card-title">第37回全日本クラブ選手権大会<br>男子60代の部</div>
+    <div class="card-subtitle">2018年7月13〜16日 ／ 男子団体 ／ 三重県・サオリーナ</div>
+    <div class="card-result"><strong>🥈 準優勝</strong></div>
+    <div class="card-link">Nittakuで詳細を見る</div>
+  </a>
+
+  <!-- 2014年8月 全日本選手権マスターズ 女子予選 -->
+  <a class="achievement-card reveal" data-tags="全日本選手権,女子個人,女子" href="https://www.tttf.jp/Schedule/Meet/Details/204" target="_blank" rel="noopener">
+    <div class="card-category">全日本選手権</div>
+    <div class="card-title">平成26年度全日本卓球選手権大会<br>マスターズの部（女子）予選</div>
+    <div class="card-subtitle">2014年8月31日 ／ 女子個人（年代別） ／ 板橋区立小豆沢体育館</div>
+    <div class="card-result">女子サーティ〜ハイエイティ 各年代<br><strong>上位入賞</strong></div>
+    <div class="card-link">TF東京で詳細を見る</div>
+  </a>
+
+  <!-- 歴代優勝チーム Rallys -->
+  <a class="achievement-card reveal" data-tags="全日本クラブ選手権,男子団体,女子団体,男子,女子" href="https://rallys.online/forplayers/club-winner/" target="_blank" rel="noopener">
+    <div class="card-category">全日本クラブ選手権</div>
+    <div class="card-title">全日本クラブ卓球選手権大会<br>歴代優勝チーム一覧</div>
+    <div class="card-subtitle">歴代記録 ／ 男女団体 ／ Rallys掲載</div>
+    <div class="card-result">【完全保存版】全日本クラブ卓球選手権大会 歴代優勝チーム一覧<br><strong>複数回 上位入賞記録あり</strong></div>
+    <div class="card-link">Rallysで詳細を見る</div>
+  </a>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">卓<span>精</span>会</div>
+  <div class="footer-copy">© 2024 Takuseikai Table Tennis Club. Established in 1967.</div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 60);
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Filter buttons — data-tags ベース
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.textContent.trim();
+      document.querySelectorAll('.achievement-card').forEach(card => {
+        const tags = (card.dataset.tags || '').split(',').map(t => t.trim());
+        const show = filter === 'ALL' || tags.includes(filter);
+        card.style.display = show ? 'flex' : 'none';
+      });
+    });
+  });
+</script>
+</body>
+</html>
