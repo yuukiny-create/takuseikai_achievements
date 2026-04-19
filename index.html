@@ -42,311 +42,258 @@
     font-weight: 700 !important;
     margin-bottom: 20px !important;
   }
+
+  /* ここから下はあなたの元の CSS（全部 style の中に戻した） */
+
+  :root {
+    --red: #C0392B;
+    --red-dark: #922B21;
+    --red-light: #E74C3C;
+    --bg: #F7F4EE;
+    --bg2: #EDEAE2;
+    --text: #1A1A1A;
+    --text-muted: #6B6560;
+    --gray: #9A9590;
+    --white: #FFFFFF;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 20px 6vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(247,244,238,0.97);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+
+  .nav-logo {
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 900;
+    font-size: 18px;
+    letter-spacing: 0.1em;
+    color: var(--text);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--red); }
+
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+  }
+  .nav-links a {
+    color: var(--gray);
+    text-decoration: none;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover, .nav-links a.active { color: var(--text); }
+
+  .page-header {
+    padding: 160px 6vw 80px;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    background: var(--bg);
+  }
+
+  .page-header-en {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.5em;
+    color: var(--red);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .page-header-en::after {
+    content: '';
+    width: 60px;
+    height: 1px;
+    background: var(--red);
+  }
+
+  .page-header h1 {
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 900;
+    font-size: clamp(42px, 8vw, 96px);
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+
+  .page-header p {
+    margin-top: 20px;
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 2;
+    max-width: 500px;
+  }
+
+  .filter-bar {
+    padding: 40px 6vw 0;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .filter-btn {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.35em;
+    padding: 8px 20px;
+    border: 1px solid rgba(0,0,0,0.15);
+    background: transparent;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .filter-btn:hover, .filter-btn.active {
+    background: var(--red);
+    border-color: var(--red);
+    color: white;
+  }
+
+  .achievements {
+    padding: clamp(40px, 6vh, 80px) 6vw clamp(80px, 12vh, 140px);
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2px;
+  }
+
+  .achievement-card {
+    background: var(--white);
+    border: 1px solid rgba(0,0,0,0.07);
+    padding: 22px 24px;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    transition: box-shadow 0.25s, transform 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .achievement-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px;
+    height: 100%;
+    background: var(--red);
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform 0.3s cubic-bezier(0.16,1,0.3,1);
+  }
+
+  .achievement-card:hover {
+    box-shadow: 0 8px 32px rgba(0,0,0,0.09);
+    transform: translateY(-3px);
+  }
+  .achievement-card:hover::before { transform: scaleY(1); }
+
+  .card-category {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.4em;
+    color: var(--red);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .card-category::after {
+    content: '';
+    flex: 1;
+    max-width: 32px;
+    height: 1px;
+    background: var(--red);
+    opacity: 0.5;
+  }
+
+  .card-title {
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--text);
+  }
+
+  .card-result {
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  .card-result strong {
+    color: var(--red);
+    font-weight: 500;
+  }
+
+  .card-subtitle {
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    color: var(--gray);
+    line-height: 1.5;
+    border-left: 2px solid rgba(0,0,0,0.1);
+    padding-left: 10px;
+  }
+
+  .achievement-card.featured {
+    background: var(--red);
+    border-color: var(--red);
+    color: white;
+  }
+
+  footer {
+    border-top: 1px solid rgba(0,0,0,0.1);
+    padding: 40px 6vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    background: var(--bg2);
+  }
+
+  .footer-logo {
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 900;
+    font-size: 22px;
+    color: var(--text);
+  }
+
+  .footer-copy {
+    font-size: 11px;
+    color: var(--gray);
+    letter-spacing: 0.2em;
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.65s cubic-bezier(0.16,1,0.3,1), transform 0.65s cubic-bezier(0.16,1,0.3,1);
+  }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  @media (max-width: 768px) {
+    .achievements { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+  }
 </style>
-    .menu {
-  list-style: none;
-  padding-left: 0;
-}
-
-.menu li a {
-  text-decoration: none;
-  color: inherit;
-  font-family: inherit;
-}
-
-    :root {
-      --red: #C0392B;
-      --red-dark: #922B21;
-      --red-light: #E74C3C;
-      --bg: #F7F4EE;
-      --bg2: #EDEAE2;
-      --text: #1A1A1A;
-      --text-muted: #6B6560;
-      --gray: #9A9590;
-      --white: #FFFFFF;
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Noto Sans JP', sans-serif;
-      font-weight: 300;
-      overflow-x: hidden;
-    }
-
-    /* ── NAV ── */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      padding: 20px 6vw;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: rgba(247,244,238,0.97);
-      backdrop-filter: blur(8px);
-      border-bottom: 1px solid rgba(0,0,0,0.06);
-    }
-
-    .nav-logo {
-      font-family: 'Noto Serif JP', serif;
-      font-weight: 900;
-      font-size: 18px;
-      letter-spacing: 0.1em;
-      color: var(--text);
-      text-decoration: none;
-    }
-    .nav-logo span { color: var(--red); }
-
-    .nav-links {
-      display: flex;
-      gap: 36px;
-      list-style: none;
-    }
-    .nav-links a {
-      color: var(--gray);
-      text-decoration: none;
-      font-size: 12px;
-      letter-spacing: 0.2em;
-      transition: color 0.2s;
-    }
-    .nav-links a:hover, .nav-links a.active { color: var(--text); }
-
-    /* ── PAGE HEADER ── */
-    .page-header {
-      padding: 160px 6vw 80px;
-      border-bottom: 1px solid rgba(0,0,0,0.08);
-      background: var(--bg);
-    }
-
-    .page-header-en {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 11px;
-      letter-spacing: 0.5em;
-      color: var(--red);
-      margin-bottom: 16px;
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-    .page-header-en::after {
-      content: '';
-      width: 60px;
-      height: 1px;
-      background: var(--red);
-    }
-
-    .page-header h1 {
-      font-family: 'Noto Serif JP', serif;
-      font-weight: 900;
-      font-size: clamp(42px, 8vw, 96px);
-      line-height: 1;
-      letter-spacing: -0.02em;
-    }
-
-    .page-header p {
-      margin-top: 20px;
-      font-size: 14px;
-      color: var(--text-muted);
-      line-height: 2;
-      max-width: 500px;
-    }
-
-    /* ── FILTER TABS ── */
-    .filter-bar {
-      padding: 40px 6vw 0;
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-
-    .filter-btn {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 11px;
-      letter-spacing: 0.35em;
-      padding: 8px 20px;
-      border: 1px solid rgba(0,0,0,0.15);
-      background: transparent;
-      color: var(--text-muted);
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    .filter-btn:hover, .filter-btn.active {
-      background: var(--red);
-      border-color: var(--red);
-      color: white;
-    }
-
-    /* ── ACHIEVEMENTS GRID ── */
-    .achievements {
-      padding: clamp(40px, 6vh, 80px) 6vw clamp(80px, 12vh, 140px);
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 2px;
-    }
-
-    .achievement-card {
-      background: var(--white);
-      border: 1px solid rgba(0,0,0,0.07);
-      padding: 22px 24px;
-      text-decoration: none;
-      color: inherit;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      transition: box-shadow 0.25s, transform 0.25s;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .achievement-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0;
-      width: 3px;
-      height: 100%;
-      background: var(--red);
-      transform: scaleY(0);
-      transform-origin: bottom;
-      transition: transform 0.3s cubic-bezier(0.16,1,0.3,1);
-    }
-
-    .achievement-card:hover {
-      box-shadow: 0 8px 32px rgba(0,0,0,0.09);
-      transform: translateY(-3px);
-    }
-    .achievement-card:hover::before { transform: scaleY(1); }
-
-    .card-category {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 10px;
-      letter-spacing: 0.4em;
-      color: var(--red);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .card-category::after {
-      content: '';
-      flex: 1;
-      max-width: 32px;
-      height: 1px;
-      background: var(--red);
-      opacity: 0.5;
-    }
-
-    .card-title {
-      font-family: 'Noto Serif JP', serif;
-      font-weight: 700;
-      font-size: 14px;
-      line-height: 1.5;
-      color: var(--text);
-    }
-
-    .card-result {
-      font-size: 12px;
-      color: var(--text-muted);
-      line-height: 1.6;
-    }
-
-    .card-result strong {
-      color: var(--red);
-      font-weight: 500;
-    }
-
-    .card-subtitle {
-      font-size: 11px;
-      letter-spacing: 0.05em;
-      color: var(--gray);
-      line-height: 1.5;
-      border-left: 2px solid rgba(0,0,0,0.1);
-      padding-left: 10px;
-    }
-    .card-subtitle {
-      font-size: 11px;
-      letter-spacing: 0.05em;
-      color: var(--gray);
-      line-height: 1.5;
-      border-left: 2px solid rgba(0,0,0,0.1);
-      padding-left: 10px;
-    }
-    .achievement-card.featured .card-subtitle {
-      color: rgba(255,255,255,0.55);
-      border-left-color: rgba(255,255,255,0.25);
-    }
-
-    .card-link {
-      margin-top: auto;
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 10px;
-      letter-spacing: 0.35em;
-      color: var(--gray);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      transition: color 0.2s;
-    }
-    .achievement-card:hover .card-link { color: var(--red); }
-    .card-link::after {
-      content: '→';
-      transition: transform 0.2s;
-    }
-    .achievement-card:hover .card-link::after { transform: translateX(4px); }
-
-    /* ── HIGHLIGHT (featured card) ── */
-    .achievement-card.featured {
-      background: var(--red);
-      border-color: var(--red);
-      color: white;
-    }
-    .achievement-card.featured::before { background: white; }
-    .achievement-card.featured .card-category { color: rgba(255,255,255,0.7); }
-    .achievement-card.featured .card-category::after { background: rgba(255,255,255,0.4); }
-    .achievement-card.featured .card-title { color: white; }
-    .achievement-card.featured .card-result { color: rgba(255,255,255,0.8); }
-    .achievement-card.featured .card-result strong { color: white; }
-    .achievement-card.featured .card-link { color: rgba(255,255,255,0.6); }
-    .achievement-card.featured:hover .card-link { color: white; }
-
-    /* ── FOOTER ── */
-    footer {
-      border-top: 1px solid rgba(0,0,0,0.1);
-      padding: 40px 6vw;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 24px;
-      flex-wrap: wrap;
-      background: var(--bg2);
-    }
-    .footer-logo {
-      font-family: 'Noto Serif JP', serif;
-      font-weight: 900;
-      font-size: 22px;
-      color: var(--text);
-    }
-    .footer-logo span { color: var(--red); }
-    .footer-copy {
-      font-size: 11px;
-      color: var(--gray);
-      letter-spacing: 0.2em;
-    }
-
-    /* ── REVEAL ── */
-    .reveal {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.65s cubic-bezier(0.16,1,0.3,1), transform 0.65s cubic-bezier(0.16,1,0.3,1);
-    }
-    .reveal.visible { opacity: 1; transform: none; }
-
-    @media (max-width: 768px) {
-      .achievements { grid-template-columns: 1fr; }
-      .nav-links { display: none; }
-    }
-  </style>
 </head>
 <body>
 
